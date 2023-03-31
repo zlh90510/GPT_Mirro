@@ -48,6 +48,8 @@ export class ChatGPTService implements OnModuleInit {
   };
 
   sendMessage(message: string, parentMessageId: string): Observable<MessageEvent> {
+    console.log(message, 123)
+    console.log(process.env.OPENAI_API_KEY, 456)
     const observable = new Observable<MessageEvent>((subscriber) => {
       this.api
         .sendMessage(message, {
@@ -60,6 +62,7 @@ export class ChatGPTService implements OnModuleInit {
           },
         })
         .catch((err) => {
+          console.log(err, 123)
           this.logger.error('Error sending message', err);
 
           subscriber.next({
@@ -77,7 +80,7 @@ export class ChatGPTService implements OnModuleInit {
           });
         });
     });
-
+    console.log(observable)
     return observable;
   }
 
